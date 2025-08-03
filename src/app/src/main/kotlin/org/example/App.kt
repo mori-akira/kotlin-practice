@@ -9,6 +9,7 @@ import org.example.basic.Collection
 import org.example.basic.Computation
 import org.example.basic.Dog
 import org.example.basic.Syntax
+import org.example.kotlinFunction.KotlinSentence
 
 class App {
     val greeting: String
@@ -22,6 +23,8 @@ fun main() {
     greet().let { println(it) }
     syntax()
     collection()
+
+    kotlinSentence()
 }
 
 fun greet(): String {
@@ -77,4 +80,15 @@ fun collection() {
     println()
     println("collection: set")
     Collection().set()
+}
+
+fun kotlinSentence() {
+    println()
+    println("kotlinSentence")
+    val kotlinSentence = KotlinSentence()
+    kotlinSentence.printOddOrEven(7)
+    kotlinSentence.printOddOrEven(10)
+    kotlinSentence.printRemainderDividedByThree(10)
+    kotlinSentence.printRemainderDividedByThree(11)
+    kotlinSentence.printRemainderDividedByThree(12)
 }
