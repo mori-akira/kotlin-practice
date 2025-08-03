@@ -3,6 +3,13 @@
  */
 package org.example
 
+import org.example.basic.Android
+import org.example.basic.ClassSyntax
+import org.example.basic.Collection
+import org.example.basic.Computation
+import org.example.basic.Dog
+import org.example.basic.Syntax
+
 class App {
     val greeting: String
         get() {
@@ -12,4 +19,62 @@ class App {
 
 fun main() {
     println(App().greeting)
+    greet().let { println(it) }
+    syntax()
+    collection()
+}
+
+fun greet(): String {
+    return "Hello from the greet function!"
+}
+
+fun syntax() {
+    println()
+    println("syntax: variable")
+    Syntax().variable()
+
+    println()
+    println("syntax: variable with type")
+    Syntax().variableWithType()
+
+    println()
+    println("syntax: function definition")
+    print(message = Syntax().functionDefinition("Kotlin"))
+
+    println()
+    println("syntax: variable sentence")
+    val syntax = Syntax()
+    syntax.variableSentence()
+
+    println()
+    println("syntax: class syntax")
+    val classSyntax = ClassSyntax("Kotlin", 1)
+    classSyntax.showParam()
+
+    println()
+    println("syntax: inheritance")
+    val dog = Dog("Buddy", 3)
+    dog.showInfo()
+    dog.cries()
+    val android = Android()
+    android.showName()
+
+    println()
+    println("syntax: interface")
+    val computation = Computation()
+    println("Computation result: ${computation.compute()}")
+}
+
+fun collection() {
+    println()
+    println("collection: list")
+    Collection().list()
+
+    println()
+    println("collection: map")
+    Collection().map()
+
+    println()
+    println("collection: set")
+    Collection().set()
 }
