@@ -9,7 +9,10 @@ import org.example.basic.Collection
 import org.example.basic.Computation
 import org.example.basic.Dog
 import org.example.basic.Syntax
-import org.example.kotlinFunction.KotlinSentence
+import org.example.variableKotlinFunction.Accessor
+import org.example.variableKotlinFunction.KotlinSentence
+import org.example.variableKotlinFunction.User1
+import org.example.variableKotlinFunction.User2
 
 class App {
     val greeting: String
@@ -25,6 +28,10 @@ fun main() {
     collection()
 
     kotlinSentence()
+    accessor()
+    dataClass()
+    functionalType()
+    expandFunction()
 }
 
 fun greet(): String {
@@ -91,4 +98,88 @@ fun kotlinSentence() {
     kotlinSentence.printRemainderDividedByThree(10)
     kotlinSentence.printRemainderDividedByThree(11)
     kotlinSentence.printRemainderDividedByThree(12)
+}
+
+fun accessor() {
+    println()
+    println("accessor")
+    val accessor = Accessor(null)
+    println("Accessor field1: ${accessor.field1}")
+    accessor.field1 = "Kotlin"
+    println("Accessor field1: ${accessor.field1}")
+    // getter、setterを直接呼び出すことはできない
+    // accessor.setField1("Java")
+    // println("Accessor field1: ${accessor.getField1()}")
+
+    println("Accessor field2: ${accessor.field2}")
+
+    try {
+        println("Accessor field3: ${accessor.field3}")
+    } catch (e: UninitializedPropertyAccessException) {
+        println("Accessor field3 is not initialized yet.")
+        e.printStackTrace()
+    }
+
+    println("Accessor field4: ${accessor.field4}")
+    accessor.field4 = "NewValue"
+    println("Accessor field4: ${accessor.field4}")
+}
+
+fun dataClass() {
+    println()
+    println("dataClass")
+    val user1_1 = User1(1)
+    val user1_2 = User1(1)
+    println("user1_1.toString(): ${user1_1.toString()}")
+    println("user1_1 == user1_2: ${user1_1 == user1_2}")
+    println("user1_1.equals(user1_2): ${user1_1.equals(user1_2)}")
+    println("user1_1.hashCode(): ${user1_1.hashCode()}")
+    println("user1_2.hashCode(): ${user1_2.hashCode()}")
+
+    val user2_1 = User2(1)
+    val user2_2 = User2(1)
+    println("user2_1.toString(): ${user2_1.toString()}")
+    println("user2_1 == user2_2: ${user2_1 == user2_2}")
+    println("user2_1.equals(user2_2): ${user2_1.equals(user2_2)}")
+    println("user2_1.hashCode(): ${user2_1.hashCode()}")
+    println("user2_2.hashCode(): ${user2_2.hashCode()}")
+
+    println("user2_1.component1(): ${user2_1.component1()}")
+    println("user2_1.component2(): ${user2_1.component2()}")
+
+    val (id, name) = user2_1
+    println("Destructured user2_1: id=$id, name=$name")
+    println("user2_1.copy(): ${user2_1.copy()}")
+}
+
+typealias Operation = (Int, Int) -> Int
+
+fun functionalType() {
+    println()
+    println("functionalType")
+    val lambda1: (Int, Int) -> Int = { a: Int, b -> a + b }
+    println("Lambda1 result: ${lambda1(3, 5)}")
+
+    val lambda2: (Int, Int) -> Int =
+            fun(a, b): Int {
+                return a + b
+            }
+    println("Lambda2 result: ${lambda2(5, 7)}")
+
+    val higherOrderFunction: (Int, Int, (Int, Int) -> Int) -> Int = { a, b, operation ->
+        operation(a, b)
+    }
+    println("Higher-order function result(plus): ${higherOrderFunction(3, 5, {a, b -> a + b})}")
+    println("Higher-order function result(multiply): ${higherOrderFunction(3, 5, {a, b -> a * b})}")
+
+    val operation: Operation = { a, b -> a - b }
+    println("Typealias Operation result: ${operation(20, 10)}")
+}
+
+fun Int.square(): Int = this * this
+
+fun expandFunction() {
+    println()
+    println("expandFunction")
+    println("5 squared: ${5.square()}")
 }
