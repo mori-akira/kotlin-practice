@@ -13,7 +13,11 @@
   "files.exclude": {
     "*.iml": true,
     ".idea": true,
-    "build": true
+    "build": true,
+    "**/.classpath": true,
+    "**/.project": true,
+    "**/.settings": true,
+    "**/.factorypath": true
   },
   "java.configuration.checkProjectSettingsExclusions": true
 }
