@@ -32,6 +32,7 @@ fun main() {
     dataClass()
     functionalType()
     expandFunction()
+    scopeFunction()
 }
 
 fun greet(): String {
@@ -182,4 +183,25 @@ fun expandFunction() {
     println()
     println("expandFunction")
     println("5 squared: ${5.square()}")
+}
+
+fun scopeFunction() {
+    println()
+    println("scopeFunction")
+    val oddNumbers =
+            with(mutableListOf<Int>()) {
+                for (i in 1..10) {
+                    if (i % 2 != 0) {
+                        // this.add(i)
+                        add(i) // thisは省略可
+                    }
+                }
+                // this.joinToString(separator = ", ")
+                joinToString(separator = ", ") // thisは省略可
+            }
+    println("Odd numbers: $oddNumbers")
+
+    listOf("Kotlin", null, "Java", null, "Python").run {
+        println("Not null languages: ${filterNotNull()}")
+    }
 }
