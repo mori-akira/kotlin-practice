@@ -5,7 +5,7 @@
             "type": "kotlin",
             "request": "launch",
             "name": "Kotlin: Launch Main",
-            "projectRoot": "${workspaceFolder}/src",
+            "projectRoot": "${workspaceFolder}",
             "mainClass": "main/kotlin/org/example/AppKt",
             "preLaunchTask": "build"
         }

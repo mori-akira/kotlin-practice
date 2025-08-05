@@ -13,6 +13,7 @@ import org.example.variableKotlinFunction.Accessor
 import org.example.variableKotlinFunction.KotlinSentence
 import org.example.variableKotlinFunction.User1
 import org.example.variableKotlinFunction.User2
+import org.example.variableKotlinFunction.MyNumber
 
 class App {
     val greeting: String
@@ -33,6 +34,7 @@ fun main() {
     functionalType()
     expandFunction()
     scopeFunction()
+    operatorOverload()
 }
 
 fun greet(): String {
@@ -204,4 +206,39 @@ fun scopeFunction() {
     listOf("Kotlin", null, "Java", null, "Python").run {
         println("Not null languages: ${filterNotNull()}")
     }
+
+    println("hoge"?.let {e -> e.repeat(2)})
+    println(null?.let {e -> e.repeat(2)})
+    println("fuga"?.let {it.repeat(2)})
+
+    val result1 = listOf(1, 3, 5, 7).apply {
+        joinToString(separator = ", ")
+    }
+    println("Result of apply: $result1")
+    val result2 = mutableListOf(1, 3, 5, 7).apply {
+        for (i in indices) {
+            this[i] *= 2
+        }
+    }
+    println("Result of apply with modification: $result2")
+
+    for (i in listOf(1, null, 3, null, 5)) {
+        i?.also { println("Processing number: $it") }
+    }
+}
+
+fun operatorOverload() {
+    println()
+    println("operatorOverload")
+    val num1 = MyNumber(10)
+    val num2 = MyNumber(5)
+
+    println("num1 + num2: ${num1 + num2}")
+    println("num1 - num2: ${num1 - num2}")
+    println("num1 * num2: ${num1 * num2}")
+    println("num1 / num2: ${num1 / num2}")
+    println("num1 % num2: ${num1 % num2}")
+
+    println("num1 < num2: ${num1 < num2}")
+    println("num1 > num2: ${num1 > num2}")
 }
