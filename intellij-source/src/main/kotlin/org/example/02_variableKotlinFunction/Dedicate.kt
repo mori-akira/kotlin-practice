@@ -1,4 +1,4 @@
-package org.example.variableKotlinFunction
+package org.example.`02_variableKotlinFunction`
 
 interface CalculationExecutor {
     val message: String

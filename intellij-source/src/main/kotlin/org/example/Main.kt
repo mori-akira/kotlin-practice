@@ -3,21 +3,21 @@
  */
 package org.example
 
-import org.example.basic.Android
-import org.example.basic.ClassSyntax
-import org.example.basic.Collection
-import org.example.basic.Computation
-import org.example.basic.Dog
-import org.example.basic.Syntax
-import org.example.variableKotlinFunction.Accessor
-import org.example.variableKotlinFunction.KotlinSentence
-import org.example.variableKotlinFunction.User1
-import org.example.variableKotlinFunction.User2
-import org.example.variableKotlinFunction.MyNumber
-import org.example.variableKotlinFunction.Dedicate
-import org.example.variableKotlinFunction.CommonCalculationExecutor
-import org.example.variableKotlinFunction.Person1
-import org.example.variableKotlinFunction.Person2
+import org.example.`01_basic`.Android
+import org.example.`01_basic`.ClassSyntax
+import org.example.`01_basic`.Collection
+import org.example.`01_basic`.Computation
+import org.example.`01_basic`.Dog
+import org.example.`01_basic`.Syntax
+import org.example.`02_variableKotlinFunction`.Accessor
+import org.example.`02_variableKotlinFunction`.KotlinSentence
+import org.example.`02_variableKotlinFunction`.User1
+import org.example.`02_variableKotlinFunction`.User2
+import org.example.`02_variableKotlinFunction`.MyNumber
+import org.example.`02_variableKotlinFunction`.Dedicate
+import org.example.`02_variableKotlinFunction`.CommonCalculationExecutor
+import org.example.`02_variableKotlinFunction`.Person1
+import org.example.`02_variableKotlinFunction`.Person2
 
 class App {
     val greeting: String
@@ -41,6 +41,7 @@ fun main() {
     operatorOverload()
     dedicate()
     collections()
+    coroutine()
 }
 
 fun greet(): String {
@@ -281,8 +282,14 @@ fun collections() {
         User(4, "Jane", 22),
         User(5, "Chris", 32),
         User(6, "David", 29),
+        User(6, "David", 29),
+        User(6, "David", 29),
     )
-    users.filter { it.age < 30 }.map { it.name.uppercase() }.forEach { println(it) }
+    users
+        .filter { it.age < 30 }
+        .map { it.name.uppercase().substring(0, 1) }
+        .reduce { acc, s -> acc + s }
+        .let { println(it) }
     println(users.sortedBy { it.age }.first())
     try {
         println(users.filter { it.name.startsWith("Z") }.last())
@@ -291,4 +298,16 @@ fun collections() {
     }
     println(users.filter { it.name.startsWith("J") }.lastOrNull())
     println(users.filter { it.name.startsWith("Z") }.firstOrNull())
+    println(users.distinct())
+    println(users.associate { Pair(it.id, it.name) })
+    println(users.associateBy { it.id })
+    println(users.associateWith(User::name))
+    println(users.count { it.id == 6 })
+    println(users.chunked(3))
+    println(users.fold(1000, { sum, user -> sum + user.age }))
+}
+
+fun coroutine() {
+    println()
+    println("coroutine")
 }

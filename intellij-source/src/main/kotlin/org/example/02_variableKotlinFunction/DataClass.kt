@@ -1,4 +1,4 @@
-package org.example.variableKotlinFunction
+package org.example.`02_variableKotlinFunction`
 
 class User1(id: Int) {
     val id: Int = id

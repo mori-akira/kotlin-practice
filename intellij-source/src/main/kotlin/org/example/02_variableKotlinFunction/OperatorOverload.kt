@@ -1,4 +1,4 @@
-package org.example.variableKotlinFunction
+package org.example.`02_variableKotlinFunction`
 
 class MyNumber (val value: Int) {
     operator fun plus(other: MyNumber): MyNumber {

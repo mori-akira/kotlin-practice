@@ -1,4 +1,4 @@
-package org.example.basic
+package org.example.`01_basic`
 
 class Collection {
     fun list() {

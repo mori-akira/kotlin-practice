@@ -1,4 +1,4 @@
-package org.example.variableKotlinFunction
+package org.example.`02_variableKotlinFunction`
 
 class KotlinSentence {
     fun printOddOrEven(num: Int) {
