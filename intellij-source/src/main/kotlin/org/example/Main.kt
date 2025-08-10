@@ -18,6 +18,7 @@ import org.example.`02_variableKotlinFunction`.Dedicate
 import org.example.`02_variableKotlinFunction`.CommonCalculationExecutor
 import org.example.`02_variableKotlinFunction`.Person1
 import org.example.`02_variableKotlinFunction`.Person2
+import org.example.`02_variableKotlinFunction`.Coroutine
 
 class App {
     val greeting: String
@@ -310,4 +311,8 @@ fun collections() {
 fun coroutine() {
     println()
     println("coroutine")
+    val coroutine = Coroutine()
+    coroutine.runGlobal()
+    coroutine.runBlockingSample()
+    coroutine.runAsync()
 }
