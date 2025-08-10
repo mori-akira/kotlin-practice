@@ -14,6 +14,10 @@ import org.example.variableKotlinFunction.KotlinSentence
 import org.example.variableKotlinFunction.User1
 import org.example.variableKotlinFunction.User2
 import org.example.variableKotlinFunction.MyNumber
+import org.example.variableKotlinFunction.Dedicate
+import org.example.variableKotlinFunction.CommonCalculationExecutor
+import org.example.variableKotlinFunction.Person1
+import org.example.variableKotlinFunction.Person2
 
 class App {
     val greeting: String
@@ -35,6 +39,8 @@ fun main() {
     expandFunction()
     scopeFunction()
     operatorOverload()
+    dedicate()
+    collections()
 }
 
 fun greet(): String {
@@ -163,17 +169,16 @@ fun functionalType() {
     val lambda1: (Int, Int) -> Int = { a: Int, b -> a + b }
     println("Lambda1 result: ${lambda1(3, 5)}")
 
-    val lambda2: (Int, Int) -> Int =
-        fun(a, b): Int {
-            return a + b
-        }
+    val lambda2: (Int, Int) -> Int = fun(a, b): Int {
+        return a + b
+    }
     println("Lambda2 result: ${lambda2(5, 7)}")
 
     val higherOrderFunction: (Int, Int, (Int, Int) -> Int) -> Int = { a, b, operation ->
         operation(a, b)
     }
-    println("Higher-order function result(plus): ${higherOrderFunction(3, 5, {a, b -> a + b})}")
-    println("Higher-order function result(multiply): ${higherOrderFunction(3, 5, {a, b -> a * b})}")
+    println("Higher-order function result(plus): ${higherOrderFunction(3, 5, { a, b -> a + b })}")
+    println("Higher-order function result(multiply): ${higherOrderFunction(3, 5, { a, b -> a * b })}")
 
     val operation: Operation = { a, b -> a - b }
     println("Typealias Operation result: ${operation(20, 10)}")
@@ -190,26 +195,25 @@ fun expandFunction() {
 fun scopeFunction() {
     println()
     println("scopeFunction")
-    val oddNumbers =
-        with(mutableListOf<Int>()) {
-            for (i in 1..10) {
-                if (i % 2 != 0) {
-                    // this.add(i)
-                    add(i) // thisは省略可
-                }
+    val oddNumbers = with(mutableListOf<Int>()) {
+        for (i in 1..10) {
+            if (i % 2 != 0) {
+                // this.add(i)
+                add(i) // thisは省略可
             }
-            // this.joinToString(separator = ", ")
-            joinToString(separator = ", ") // thisは省略可
         }
+        // this.joinToString(separator = ", ")
+        joinToString(separator = ", ") // thisは省略可
+    }
     println("Odd numbers: $oddNumbers")
 
     listOf("Kotlin", null, "Java", null, "Python").run {
         println("Not null languages: ${filterNotNull()}")
     }
 
-    println("hoge"?.let {e -> e.repeat(2)})
-    println(null?.let {e -> e.repeat(2)})
-    println("fuga"?.let {it.repeat(2)})
+    println("hoge"?.let { e -> e.repeat(2) })
+    println(null?.let { e -> e.repeat(2) })
+    println("fuga"?.let { it.repeat(2) })
 
     val result1 = listOf(1, 3, 5, 7).apply {
         joinToString(separator = ", ")
@@ -241,4 +245,50 @@ fun operatorOverload() {
 
     println("num1 < num2: ${num1 < num2}")
     println("num1 > num2: ${num1 > num2}")
+}
+
+fun dedicate() {
+    println()
+    println("dedicate")
+    val dedicatedCalculator = Dedicate(CommonCalculationExecutor())
+    dedicatedCalculator.printStartMessage()
+    val result = dedicatedCalculator.calc(3, 5)
+    println("Calculation result: $result")
+
+    val person1 = Person1()
+    person1.name = "John Doe"
+    person1.address = "123 Main St"
+    println("Person1 name: ${person1.name}")
+    println("Person1 address: ${person1.address}")
+
+    val person2 = Person2()
+    person2.name = "Smith Johnson"
+    person2.address = "456 Elm St"
+    println("Person2 name: ${person2.name}")
+    println("Person2 address: ${person2.address}")
+}
+
+data class User(val id: Int, val name: String, val age: Int)
+
+fun collections() {
+    println()
+    println("collection: list")
+    listOf(1, 2, 3).forEach { println(it * it) }
+    val users = listOf(
+        User(1, "Alice", 30),
+        User(2, "Bob", 25),
+        User(3, "John", 28),
+        User(4, "Jane", 22),
+        User(5, "Chris", 32),
+        User(6, "David", 29),
+    )
+    users.filter { it.age < 30 }.map { it.name.uppercase() }.forEach { println(it) }
+    println(users.sortedBy { it.age }.first())
+    try {
+        println(users.filter { it.name.startsWith("Z") }.last())
+    } catch (e: NoSuchElementException) {
+        e.printStackTrace(System.out)
+    }
+    println(users.filter { it.name.startsWith("J") }.lastOrNull())
+    println(users.filter { it.name.startsWith("Z") }.firstOrNull())
 }
