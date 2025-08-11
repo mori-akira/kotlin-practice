@@ -11,3 +11,6 @@ Go言語ベースで動くOSSのIdP
 ## ログイン情報(初期ユーザ)
 name: zitadel-admin@zitadel.localhost
 pass: Password1!
+
+## 発行済みのPAT
+`Yb8Ewhz9exmDnALUMznqLSUFjZbJD1uCDF7hUFMkvzqEnKNaiJgoAuLEi9X3CuNU7vRN08E`

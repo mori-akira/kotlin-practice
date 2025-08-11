@@ -18,8 +18,16 @@ spring:
     console:
       enabled: true
       path: /h2-console
+  security:
+    oauth2:
+      resourceserver:
+#        jwt:
+#          issuer-uri: http://localhost:5000
+        opaque-token:
+            introspection-uri: http://localhost:5000/oauth/v2/introspect
+            client-id: 332827308169691139
+            client-secret: p83zHZcei2nfqL38eX4NJJgwrMB21DfwjwEOqvDqf3DzZi2evygyANEmjUIG2c5j
 
 logging:
   level:
     org.hibernate.SQL: debug
-
